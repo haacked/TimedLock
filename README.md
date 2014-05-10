@@ -16,3 +16,29 @@ I wrote a series of blog posts trying to improve on this.
 * [TimedLock with stack traces strikes back](http://haacked.com/archive/2004/10/13/TimedLockWithStackTracesStrikesBack.aspx/)
 
 I finally moved the code into this Repository.
+
+## Usage Exampls
+
+```csharp
+try
+{
+    TimedLock timeLock = TimedLock.Lock(obj);
+    //Thread safe operations
+    timeLock.Dispose();
+}
+catch(LockTimeoutException e)
+{
+    Console.WriteLine("Couldn't get a lock!");
+    StackTrace otherStack = e.GetBlockingThreadStackTrace(5000);
+    if(otherStack == null)
+    {
+        Console.WriteLine("Couldn't get other stack!");
+    }
+    else
+    {
+        Console.WriteLine("Stack trace of thread that owns lock!");
+    }
+}
+```
+
+Note, you'll only ever get the other stack trace in `DEBUG` builds.
