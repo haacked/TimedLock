@@ -17,7 +17,7 @@ I wrote a series of blog posts trying to improve on this.
 
 I finally moved the code into this Repository.
 
-## Usage Exampls
+## Usage Example
 
 ```csharp
 try
